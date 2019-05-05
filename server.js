@@ -13,6 +13,10 @@ mongoose.connect(localDB, {useNewUrlParser : true})
 .then(()=> console.log('mongodb connected'),
 (err) => console.log(err))
 
+mongoose.set('useCreateIndex', true)
+
+app.use(express.json())
+
 app.set('view engine', 'ejs')
 app.use(expressLayout)
 
