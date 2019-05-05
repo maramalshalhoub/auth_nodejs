@@ -24,5 +24,17 @@ userSchema.pre('save', function(next){
  }
 })
 
+
+userSchema.methods.verifyPassword = (plainPassword, hashedPassword, next) => {
+
+  bcrypt.compare(plainPassword, hashedPassword, (err, response) => {
+    if(err) { 
+      return next(err) 
+    }
+    return next(null, response)
+  })
+}
+
+
 const User = mongoose.model('User', userSchema)
 module.exports = User

@@ -6,6 +6,8 @@ const express = require('express')
 const app = express()
 const expressLayout = require('express-ejs-layouts')
 const mongoose = require('mongoose')
+const passport = require('passport')
+const session = require('express-session')
 
 const userRoutes = require('./routes/usersroutes')
 
@@ -16,9 +18,18 @@ mongoose.connect(localDB, {useNewUrlParser : true})
 mongoose.set('useCreateIndex', true)
 
 app.use(express.json())
-
 app.set('view engine', 'ejs')
 app.use(expressLayout)
+
+app.use(session({
+ secret : process.env.SESSION_SECRET,
+ resave: false,
+ saveUninitialized: true
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use('/users', userRoutes)
 
