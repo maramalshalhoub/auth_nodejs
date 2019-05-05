@@ -14,6 +14,7 @@ router.get('/', (req, res)=> {
  // res.render('users/index')
 })
 
+
 router.post('/register',(req, res)=> {
   let user = new User(req.body)
 
@@ -38,7 +39,10 @@ router.get('/login',(req, res)=>{
 })
 
 router.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local', 
+    { 
+      failureRedirect: '/login' 
+    }),
   function(req, res) {
     res.redirect('/');
   });
