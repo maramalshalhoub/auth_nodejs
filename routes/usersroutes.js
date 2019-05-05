@@ -23,7 +23,7 @@ router.get('/', (req, res)=> {
 })
 
 router.get('/profile', isLoggedIn, (req, res)=>{
-
+  console.log(req.user)
   res.send("you are in!")
 })
 
