@@ -20,7 +20,7 @@ router.post('/register',(req, res)=> {
   user.save()
   .then(() => {
   //  res.send({message: "user saved!", user: user})
-    res.render('users/profile')
+    res.redirect('/users')
   })
   .catch(err => {
    console.log(err)
@@ -31,6 +31,10 @@ router.post('/register',(req, res)=> {
 
 router.get('/register',(req, res)=>{
   res.render('users/register')
+})
+
+router.get('/login',(req, res)=>{
+  res.render('users/login')
 })
 
 router.post('/login', 

@@ -17,7 +17,8 @@ mongoose.connect(localDB, {useNewUrlParser : true})
 
 mongoose.set('useCreateIndex', true)
 
-app.use(express.json())
+app.use(express.urlencoded({ extended : false}))//for form data
+app.use(express.json())// for json data
 app.set('view engine', 'ejs')
 app.use(expressLayout)
 
