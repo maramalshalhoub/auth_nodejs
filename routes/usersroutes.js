@@ -2,8 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const passport = require('../helpers/passport')
-
 const User = require('../models/user')
+
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next()
+  }else{
+    res.redirect('/users/login')
+  }
+}
 
 router.get('/', (req, res)=> {
  User.find()
@@ -14,6 +22,10 @@ router.get('/', (req, res)=> {
  // res.render('users/index')
 })
 
+router.get('/profile', isLoggedIn, (req, res)=>{
+
+  res.send("you are in!")
+})
 
 router.post('/register',(req, res)=> {
   let user = new User(req.body)
