@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const passport = require('passport')
-require('../helpers/passport')
+const passport = require('../helpers/passport')
 
 const User = require('../models/user')
 
@@ -20,12 +19,18 @@ router.post('/register',(req, res)=> {
 
   user.save()
   .then(() => {
-   res.send({message: "user saved!", user: user})
+  //  res.send({message: "user saved!", user: user})
+    res.render('users/profile')
   })
   .catch(err => {
    console.log(err)
   })
 
+})
+
+
+router.get('/register',(req, res)=>{
+  res.render('users/register')
 })
 
 router.post('/login', 
